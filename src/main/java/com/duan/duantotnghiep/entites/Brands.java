@@ -7,12 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "Brands")
 @Data
-public class Brands {
+public class Brands implements Serializable {
     @Id
     private String ID;
     private String name;

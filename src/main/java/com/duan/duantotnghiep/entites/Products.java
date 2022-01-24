@@ -2,11 +2,12 @@ package com.duan.duantotnghiep.entites;
 
 import lombok.*;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Products")
 @Data
-public class Products {
+public class Products implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;

@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "Accounts")
 @Data
-public class Accounts {
+public class Accounts implements Serializable {
     @Id
     private String username;
     private String password;
