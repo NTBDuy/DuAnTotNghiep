@@ -3,10 +3,7 @@ package com.duan.duantotnghiep.entites;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,10 +12,11 @@ import java.util.List;
 @Data
 public class Categories implements Serializable {
     @Id
-    private String ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ID;
     private String name;
 
     @JsonIgnore
     @OneToMany(mappedBy = "categories")
-    private List<Product_details> product_details;
+    private List<Products> products;
 }

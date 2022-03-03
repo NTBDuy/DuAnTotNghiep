@@ -10,9 +10,8 @@ import java.io.Serializable;
 @Data
 public class Authorities implements Serializable {
     @Id
-    private String ID;
-//    private String username;
-//    private String role_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ID;
 
     @ManyToOne @JoinColumn(name = "Username")
     Accounts accounts;

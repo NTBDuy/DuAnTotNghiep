@@ -12,14 +12,12 @@ import java.math.BigDecimal;
 public class Order_details implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
-//    private Integer product_detail_id;
+    private Long ID;
     private Integer quantity;
     private BigDecimal price;
-//    private Integer order_id;
 
-    @ManyToOne @JoinColumn(name = "product_detail_id")
-    Product_details product_details;
+    @ManyToOne @JoinColumn(name = "product_id")
+    Products products;
 
     @ManyToOne @JoinColumn(name = "order_id")
     Orders orders;

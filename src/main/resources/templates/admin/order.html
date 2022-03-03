@@ -1,0 +1,148 @@
+<main class="container-fluid px-4 mt-3 d-flex justify-content-center">
+    <div class="card mb-4 pb-3" style="width: 90%;">
+        <div class="row text-center">
+            <h4 class="mt-4">ORDER MANAGEMENT</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="container mx-1 mt-1">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a ng-click="initialize()" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                            aria-selected="true">List</a>
+                        <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Detail</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div>
+                            <!-- LIST -->
+                            <div class="container-fluid px-4">
+                                <div class="d-flex justify-content-between">
+                                    <div class="py-4">
+                                        <h4 class="mt-4 mb-4">LIST ORDER</h4>
+                                    </div>
+                                    <div class="py-4 me-4">
+                                        <form class="mt-4" ng-submit="search()">
+                                            <div class="input-group">
+                                                <input id="searchName" ng-model="searchName" ng-change="search()"
+                                                    type="text" class="form-control" aria-label="Recipient's username"
+                                                    aria-describedby="button-addon2">
+                                                <button type="submit" ng-click="" class="btn btn-outline-secondary"
+                                                    id="button-addon2"><i class="bi bi-search"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card mb-4">
+                                    <!--                                        <div class="card-header">-->
+                                    <!--                                            <div class="row">-->
+                                    <!--                                                &lt;!&ndash; <div class="col"><i class="fas fa-table me-1"></i> List Products</div> &ndash;&gt;-->
+                                    <!--                                                &lt;!&ndash; <div class="col"><p class="m-0" style="color: red;">#thongbao</p> </div> &ndash;&gt;-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <div class="card-body">
+                                        <table class="table text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Order Date</th>
+                                                    <th scope="col">Address</th>
+                                                    <th scope="col">Number phone</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in pager.items">
+                                                    <td>{{item.id}}</td>
+                                                    <td>{{item.amount}}</td>
+                                                    <td>{{item.orderDate | date: 'dd-MM-yyyy'}}</td>
+                                                    <td>{{item.address}}</td>
+                                                    <td></td>
+                                                    <td>{{item.status}}</td>
+                                                    <td>
+                                                        <div class="btn-group" role="group"
+                                                            aria-label="Basic outlined example">
+                                                            <button ng-click="detailItemsFunc(item)" type="button"
+                                                                class="btn btn-outline-warning"><i
+                                                                    class="bi bi-pencil-square"></i></button>
+                                                            <button ng-click="delete(item)" type="button"
+                                                                class="btn btn-outline-danger"><i
+                                                                    class="bi bi-trash"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <hr />
+                                        <div class="text-center">
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <button ng-click="pager.first()" type="button"
+                                                    class="btn btn-outline-secondary"><i class="bi bi-caret-left"></i><i
+                                                        class="bi bi-caret-left"></i></button>
+                                                <button ng-click="pager.prev()" type="button"
+                                                    class="btn btn-outline-secondary"><i
+                                                        class="bi bi-caret-left"></i></button>
+                                                <button type="button" class="btn btn-outline-secondary">{{pager.page+1}}
+                                                    of
+                                                    {{pager.count}}</button>
+                                                <button ng-click="pager.next()" type="button"
+                                                    class="btn btn-outline-secondary"><i
+                                                        class="bi bi-caret-right"></i></button>
+                                                <button ng-click="pager.last()" type="button"
+                                                    class="btn btn-outline-secondary"><i
+                                                        class="bi bi-caret-right"></i><i
+                                                        class="bi bi-caret-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div>
+                            <!-- FORM -->
+                            <div class="container-fluid px-4">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4 class="mt-4 mb-4">Detail Order</h4>
+                                    </div>
+                                </div>
+                                <div class="card mb-4">
+                                    <!-- <div class="card-header text-center" style="background-color: #fff;"></div> -->
+                                    <div class="card-body">
+                                        <table class="table text-center tableGioHang">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã</th>
+                                                    <th scope="col">Sản phẩm</th>
+                                                    <th scope="col">Giá</th>
+                                                    <th scope="col">Số lượng</th>
+                                                    <th scope="col">Tổng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="d in detailItems">
+                                                    <td class="py-5">{{d.id}}</td>
+                                                    <td class="py-5">{{d.products.name}}</td>
+                                                    <td class="py-5">{{d.products.price | number : 0}}</td>
+                                                    <td class="py-5">{{d.quantity}}</td>
+                                                    <td class="py-5">{{d.price | number : 0}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

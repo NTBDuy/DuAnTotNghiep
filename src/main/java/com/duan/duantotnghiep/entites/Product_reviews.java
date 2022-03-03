@@ -14,7 +14,7 @@ import java.util.List;
 public class Product_reviews implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
+    private Long ID;
     private String comment;
     private Date date;
     private Double rating;
@@ -24,6 +24,6 @@ public class Product_reviews implements Serializable {
     @OneToMany(mappedBy = "product_reviews")
     private List<Products> products;
 
-    @ManyToOne @JoinColumn(name = "customer_id")
-    Customers customers;
+    @ManyToOne @JoinColumn(name = "Username")
+    Accounts accounts;
 }

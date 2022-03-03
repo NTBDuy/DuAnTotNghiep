@@ -15,18 +15,18 @@ import java.util.List;
 public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
-    private BigDecimal amount;
+    private Long ID;
+    private Integer amount;
     private Date orderDate;
+    private String address;
     private Integer status;
-//    private Integer customer_id;
 
     @JsonIgnore
     @OneToMany(mappedBy = "orders")
-    private List<Order_details> order_details;
+    private List<Order_details> orderDetails;
 
-    @ManyToOne @JoinColumn(name = "customer_id")
-    Customers customers;
+    @ManyToOne @JoinColumn(name = "Username")
+    Accounts accounts;
 
 
 }
