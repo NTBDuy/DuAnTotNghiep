@@ -17,7 +17,7 @@ public class OrderAdminController {
 
     // Lấy tất cả Orders
     @GetMapping()
-    public List<Orders> productList() {
+    public List<Orders> ordersList() {
         return orderService.findAll();
     }
 

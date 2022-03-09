@@ -18,6 +18,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Products> findAllByNameLike(String name) {
+        return productRepository.findAllByNameLike(name);
+    }
+
+    @Override
+    public List<Products> findByCategory(Long id) {
+        return productRepository.findByCategory(id);
+    }
+
+    @Override
+    public List<Products> findByBrands(Long id) {
+        return productRepository.findByBrands(id);
+    }
+
+    @Override
     public Products findById(Long id) {
         return productRepository.findById(id).get();
     }

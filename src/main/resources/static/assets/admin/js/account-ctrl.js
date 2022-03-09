@@ -23,6 +23,20 @@ app.controller("account-ctrl", function($scope, $http){
         $(".nav-tabs a:eq(1)").tab('show')
     }
 
+    $scope.search = function () {
+        var x = document.getElementById("searchName").value;
+        if (x == '') {
+            $http.get(`/rest/admin/account`).then(resp => {
+                $scope.items = resp.data;
+            });
+        } else {
+            $http.get(`/rest/admin/account/search/${x}`).then(resp => {
+                $scope.items = resp.data;
+                $scope.pager.first()
+            });
+        }
+    }
+
     //Thêm 
     $scope.create = function () {
         var item = angular.copy($scope.form);

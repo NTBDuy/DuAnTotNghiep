@@ -19,7 +19,21 @@ app.controller("brand-ctrl", function($scope, $http){
         $scope.form = angular.copy(item);
         $(".nav-tabs a:eq(1)").tab('show')
     }
-    
+
+    $scope.search = function () {
+        var x = document.getElementById("searchName").value;
+        if (x == '') {
+            $http.get(`/rest/admin/brand`).then(resp => {
+                $scope.items = resp.data;
+            });
+        } else {
+            $http.get(`/rest/admin/brand/search/${x}`).then(resp => {
+                $scope.items = resp.data;
+                $scope.pager.first()
+            });
+        }
+    }
+
     //Thêm 
     $scope.create = function () {
         var item = angular.copy($scope.form);

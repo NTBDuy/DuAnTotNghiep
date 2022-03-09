@@ -14,13 +14,13 @@ import java.util.List;
 public class Products implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
-    private String name;
-    private BigDecimal price;
-    private String images;
-    private Boolean active;
-    private Integer discount;
-    private String description;
+    Long ID;
+    String name;
+    BigDecimal price;
+    String images;
+    Boolean active;
+    Integer discount;
+    String description;
 
     @ManyToOne @JoinColumn(name = "review_id")
     Product_reviews product_reviews;
@@ -33,5 +33,5 @@ public class Products implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "products")
-    private List<Order_details> order_details;
+    List<Order_details> order_details;
 }

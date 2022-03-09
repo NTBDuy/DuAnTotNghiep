@@ -8,6 +8,8 @@ import java.util.List;
 public interface CategoryService {
     List<Categories> findAll();
 
+    List<Categories> findAllByNameLike(String kw);
+
     Categories create(Categories c);
 
     Categories update(Categories c);

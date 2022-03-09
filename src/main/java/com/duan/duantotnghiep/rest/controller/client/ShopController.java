@@ -3,10 +3,7 @@ package com.duan.duantotnghiep.rest.controller.client;
 import com.duan.duantotnghiep.entites.Products;
 import com.duan.duantotnghiep.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +16,13 @@ public class ShopController {
 
     @GetMapping()
     public List<Products> productsList() {return productService.findAll();}
+
+    @GetMapping("/search/{keyword}")
+    public List<Products> productsListByName(@PathVariable("keyword") String keyword) {return productService.findAllByNameLike("%"+keyword+"%");}
+
+    @GetMapping("/byCate/{id}")
+    public List<Products> productsListByCate(@PathVariable("id") Long id) {return productService.findByCategory(id);}
+
+    @GetMapping("/byBrand/{id}")
+    public List<Products> productsListByBrand(@PathVariable("id") Long id) {return productService.findByBrands(id);}
 }

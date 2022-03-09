@@ -1,12 +1,13 @@
 package com.duan.duantotnghiep.service;
 
 import com.duan.duantotnghiep.entites.Accounts;
-import com.duan.duantotnghiep.entites.Brands;
 
 import java.util.List;
 
 public interface AccountService {
     List<Accounts> findAll();
+
+    List<Accounts> search(String keyword);
 
     Accounts create(Accounts a);
 

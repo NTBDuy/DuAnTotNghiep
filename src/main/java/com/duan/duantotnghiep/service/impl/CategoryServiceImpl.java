@@ -20,6 +20,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Categories> findAllByNameLike(String kw) {
+        return categoryRepository.findAllByNameLike(kw);
+    }
+
+    @Override
     public Categories create(Categories c) {
         return categoryRepository.save(c);
     }

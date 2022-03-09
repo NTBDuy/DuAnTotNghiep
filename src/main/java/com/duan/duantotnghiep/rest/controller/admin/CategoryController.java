@@ -17,9 +17,13 @@ public class CategoryController {
 
     // Lấy tất cả Categories
     @GetMapping()
-    public List<Categories> productList() {
+    public List<Categories> categoriesList() {
         return categoryService.findAll();
     }
+
+    // Tìm kiếm Cate theo tên
+    @GetMapping("/search/{keyword}")
+    public  List<Categories> findAllByNameLike(@PathVariable("keyword") String keyword) { return  categoryService.findAllByNameLike("%"+keyword+"%");}
 
     // Tạo mới Categories
     @PostMapping()

@@ -1,5 +1,6 @@
 package com.duan.duantotnghiep.rest.controller.admin;
 
+import com.duan.duantotnghiep.entites.Categories;
 import com.duan.duantotnghiep.entites.Products;
 import com.duan.duantotnghiep.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class ProductController {
     public List<Products> productList() {
         return productService.findAll();
     }
+
+    // Tìm kiếm Pro theo tên
+    @GetMapping("/search/{keyword}")
+    public  List<Products> findAllByNameLike(@PathVariable("keyword") String keyword) { return  productService.findAllByNameLike("%"+keyword+"%");}
 
     // Lấy Product theo ID
     @GetMapping("{id}")

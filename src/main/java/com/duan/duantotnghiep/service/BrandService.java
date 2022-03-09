@@ -7,6 +7,8 @@ import java.util.List;
 public interface BrandService {
     List<Brands> findAll();
 
+    List<Brands> findAllByNameLike(String kw);
+
     Brands create(Brands b);
 
     Brands update(Brands b);

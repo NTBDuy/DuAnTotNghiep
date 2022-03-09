@@ -27,6 +27,20 @@ app.controller("product-ctrl", function ($scope, $http) {
         };
     }
 
+    $scope.search = function () {
+        var x = document.getElementById("searchName").value;
+        if (x == '') {
+            $http.get(`/rest/admin/product`).then(resp => {
+                $scope.items = resp.data;
+            });
+        } else {
+            $http.get(`/rest/admin/product/search/${x}`).then(resp => {
+                $scope.items = resp.data;
+                $scope.pager.first()
+            });
+        }
+    }
+
     $scope.initialize();
 
     $scope.detail = function (item) {

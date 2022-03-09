@@ -1,7 +1,6 @@
 package com.duan.duantotnghiep.rest.controller.admin;
 
 import com.duan.duantotnghiep.entites.Accounts;
-import com.duan.duantotnghiep.entites.Brands;
 import com.duan.duantotnghiep.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +16,13 @@ public class AccountController {
 
     // Lấy tất cả Accounts
     @GetMapping()
-    public List<Accounts> productList() {
+    public List<Accounts> accountsList() {
         return accountService.findAll();
     }
+
+    // Tìm kiếm Acc theo tên
+    @GetMapping("/search/{keyword}")
+    public  List<Accounts> findAllByNameLike(@PathVariable("keyword") String keyword) { return  accountService.search("%"+keyword+"%");}
 
     // Tạo mới Accounts
     @PostMapping()

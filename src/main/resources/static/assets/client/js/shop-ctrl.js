@@ -5,10 +5,48 @@ app.controller("myCtrl", function($scope, $http){
     $scope.itemsP = [];
     $scope.tong = 0;
 
+    $scope.loadCateAndBrand = function(){
+        //load categories
+        $http.get("/rest/admin/category").then(resp => {
+            $scope.cates = resp.data;
+        })
+        //load brands
+        $http.get("/rest/admin/brand").then(resp => {
+            $scope.brands = resp.data;
+        })
+    }
+
+    $scope.loadProByCate = function(id) {
+        $http.get(`/rest/shop/byCate/${id}`).then(resp => {
+            $scope.itemsP = resp.data;
+        });
+    }
+
+
+    $scope.loadProByBrand = function(id) {
+        $http.get(`/rest/shop/byBrand/${id}`).then(resp => {
+            $scope.itemsP = resp.data;
+        });
+    }
+
     $scope.initialize = function(){
         $http.get(`/rest/shop`).then(resp => {
             $scope.itemsP = resp.data;
         })
+        $scope.loadCateAndBrand();
+    }
+
+    $scope.search = function () {
+        var x = document.getElementById("searchName").value;
+        if (x == '') {
+            $http.get("/rest/shop").then(resp => {
+                $scope.itemsP = resp.data;
+            });
+        } else {
+            $http.get(`/rest/shop/search/${x}`).then(resp => {
+                $scope.itemsP = resp.data;
+            });
+        }
     }
 
     $scope.initialize();
@@ -87,8 +125,7 @@ app.controller("myCtrl", function($scope, $http){
     $scope.order = {
         orderDate: new Date(),
         address: "",
-        accounts: { username: "admin" },
-        // accounts: { username: $("#username").text() },
+        accounts: { username: $("#username").text() },
         status: 1,
         amount: $scope.tong,
         get orderDetails() {

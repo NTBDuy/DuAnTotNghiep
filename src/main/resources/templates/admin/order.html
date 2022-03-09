@@ -51,6 +51,7 @@
                                                     <th scope="col">Order Date</th>
                                                     <th scope="col">Address</th>
                                                     <th scope="col">Number phone</th>
+                                                    <th scope="col">Username</th>
                                                     <th scope="col">Status</th>
                                                     <th scope="col">Detail</th>
                                                 </tr>
@@ -62,6 +63,7 @@
                                                     <td>{{item.orderDate | date: 'dd-MM-yyyy'}}</td>
                                                     <td>{{item.address}}</td>
                                                     <td></td>
+                                                    <td>{{item.accounts.username}}</td>
                                                     <td>{{item.status}}</td>
                                                     <td>
                                                         <div class="btn-group" role="group"

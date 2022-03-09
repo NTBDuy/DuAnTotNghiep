@@ -13,10 +13,10 @@ import java.util.List;
 public class Brands implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
-    private String name;
+    Long ID;
+    String name;
 
     @JsonIgnore
     @OneToMany(mappedBy = "brands", cascade= CascadeType.ALL)
-    private List<Products> products;
+    List<Products> products;
 }

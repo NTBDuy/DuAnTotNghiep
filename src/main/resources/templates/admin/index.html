@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8" />
@@ -41,7 +41,7 @@
                     <li><a class="dropdown-item" href="/">Home Page</a></li>
                     <!-- <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li><hr class="dropdown-divider" /></li> -->
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" th:href="@{/security/logoff}">Logout</a></li>
                 </ul>
             </li>
         </ul>

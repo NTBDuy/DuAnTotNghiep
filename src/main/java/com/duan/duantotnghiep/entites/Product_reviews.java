@@ -14,15 +14,15 @@ import java.util.List;
 public class Product_reviews implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
-    private String comment;
-    private Date date;
-    private Double rating;
+    Long ID;
+    String comment;
+    Date date;
+    Double rating;
 //    private Integer customer_id;
 
     @JsonIgnore
     @OneToMany(mappedBy = "product_reviews")
-    private List<Products> products;
+    List<Products> products;
 
     @ManyToOne @JoinColumn(name = "Username")
     Accounts accounts;
