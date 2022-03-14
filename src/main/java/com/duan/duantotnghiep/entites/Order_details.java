@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Order_Details")
 @Data

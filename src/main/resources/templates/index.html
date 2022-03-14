@@ -58,7 +58,7 @@
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                         <th:block th:if="${#request.remoteUser}">
-                            <li><a ng-click="showhoso()" class="dropdown-item" th:href="@{/order/list}">Profile</a></li>
+                            <li><a ng-click="showhoso()" class="dropdown-item" th:href="@{/profile}">Profile</a></li>
                             <li th:if="${#request.isUserInRole('ADMI') or #request.isUserInRole('STAF')}">
                                 <a class="dropdown-item" th:href="@{/admin/}">Admin</a>
                             </li>

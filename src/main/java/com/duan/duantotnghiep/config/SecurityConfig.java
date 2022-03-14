@@ -64,27 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizationEndpoint()
 				.baseUri("/oauth2/authorization");
 	}
-
-	//Phân quyền sử dụng
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf().disable();
-//		http.authorizeRequests()
-//		.antMatchers("/checkout/**").authenticated()
-//		.antMatchers("/admin/**").hasAnyRole("STAFF","ADMIN")
-//		.antMatchers("/rest/authorities").hasRole("ADMIN")
-//		.anyRequest().permitAll();
-//
-//		http.formLogin()
-//		.loginPage("/security/login")
-//		.defaultSuccessUrl("/security/login/success",false)
-//		.failureUrl("/security/login/error");
-//
-//		http.logout()
-//		.logoutUrl("/security/logoff")
-//		.logoutSuccessUrl("/security/logoff/success");
-//
-//	}
 	
 	//Cho phép truy xuất RESP API từ bên ngoài (domain khác)
 	@Override

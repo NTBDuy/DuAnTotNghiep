@@ -36,12 +36,6 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4">
-                                    <!--                                        <div class="card-header">-->
-                                    <!--                                            <div class="row">-->
-                                    <!--                                                &lt;!&ndash; <div class="col"><i class="fas fa-table me-1"></i> List Products</div> &ndash;&gt;-->
-                                    <!--                                                &lt;!&ndash; <div class="col"><p class="m-0" style="color: red;">#thongbao</p> </div> &ndash;&gt;-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
                                     <div class="card-body">
                                         <table class="table text-center">
                                             <thead>
@@ -59,7 +53,7 @@
                                             <tbody>
                                                 <tr ng-repeat="item in pager.items">
                                                     <td>{{item.id}}</td>
-                                                    <td>{{item.amount}}</td>
+                                                    <td>{{item.amount | number : 0}}</td>
                                                     <td>{{item.orderDate | date: 'dd-MM-yyyy'}}</td>
                                                     <td>{{item.address}}</td>
                                                     <td></td>

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Products")
 @Data

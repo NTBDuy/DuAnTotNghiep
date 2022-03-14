@@ -25,6 +25,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Accounts findByUsername(String username) {
+        return accountRepository.findByUsername(username);
+    }
+
+    @Override
     public List<Accounts> findAll() {
         return accountRepository.findAll();
     }

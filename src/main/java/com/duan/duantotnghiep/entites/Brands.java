@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Brands")
 @Data

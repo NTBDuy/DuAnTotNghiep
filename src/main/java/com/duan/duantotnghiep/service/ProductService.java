@@ -2,8 +2,8 @@ package com.duan.duantotnghiep.service;
 
 import com.duan.duantotnghiep.entites.Products;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
     List<Products> findAll();
@@ -13,6 +13,8 @@ public interface ProductService {
     List<Products> findByCategory(Long id);
 
     List<Products> findByBrands(Long id);
+
+    List<Products> filterProducts(BigDecimal min, BigDecimal max);
 
     Products findById(Long id);
 

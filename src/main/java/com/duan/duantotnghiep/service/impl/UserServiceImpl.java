@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         String userN = parts[0];
         String pass = pe.encode("123@abcxyzacas");
         System.out.println(email);
-        if(accountRepository.existsById(email)==false) {
+        if(accountRepository.existsById(userN)==false) {
             Accounts ac = new Accounts();
             ac.setEmail(email);
             ac.setUsername(userN);
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
             Authentication auth = new UsernamePasswordAuthenticationToken(user, null,user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
         } else {
-            Accounts account = accountRepository.findById(email).get();
+            Accounts account = accountRepository.findById(userN).get();
             String[]roles = account.getAuthorities().stream()
                     .map(au -> au.getRoles().getID())
                     .collect(Collectors.toList()).toArray(new String[0]);

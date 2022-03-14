@@ -5,6 +5,7 @@ import com.duan.duantotnghiep.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -25,4 +26,9 @@ public class ShopController {
 
     @GetMapping("/byBrand/{id}")
     public List<Products> productsListByBrand(@PathVariable("id") Long id) {return productService.findByBrands(id);}
+
+    @GetMapping("/byPrice/{min}and{max}")
+    public List<Products> productsListByPrice(@PathVariable("min") BigDecimal min, @PathVariable("max") BigDecimal max) {
+        return productService.filterProducts(min, max);
+    }
 }

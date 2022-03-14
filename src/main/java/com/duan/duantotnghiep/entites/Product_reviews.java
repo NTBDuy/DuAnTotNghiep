@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Product_Reviews")
 @Data

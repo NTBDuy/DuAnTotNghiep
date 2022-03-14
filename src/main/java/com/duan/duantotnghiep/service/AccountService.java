@@ -9,6 +9,8 @@ public interface AccountService {
 
     List<Accounts> search(String keyword);
 
+    Accounts findByUsername(String username);
+
     Accounts create(Accounts a);
 
     Accounts update(Accounts a);

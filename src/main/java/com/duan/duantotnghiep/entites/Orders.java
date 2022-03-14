@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Orders")
 @Data
@@ -16,7 +17,7 @@ public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long ID;
-    Integer amount;
+    BigDecimal amount;
     Date orderDate;
     String address;
     Integer status;

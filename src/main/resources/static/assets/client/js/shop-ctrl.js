@@ -2,8 +2,19 @@ const app = angular.module("myApp", [])
 
 app.controller("myCtrl", function($scope, $http){
 
+
     $scope.itemsP = [];
     $scope.tong = 0;
+
+    $scope.loadProfile
+
+    $scope.loadByPrice = function() {
+        var min = document.getElementById("min_price").value;
+        var max = document.getElementById("max_price").value;
+        $http.get(`/rest/shop/byPrice/${min}and${max}`).then(resp => {
+            $scope.itemsP = resp.data;
+        });
+    }
 
     $scope.loadCateAndBrand = function(){
         //load categories
@@ -116,7 +127,7 @@ app.controller("myCtrl", function($scope, $http){
         loadFromLocalStorage() {
             var json = localStorage.getItem("cart");
             this.items = json ? JSON.parse(json) : [];
-            $scope.tong = $scope.cart.count
+            $scope.tong = $scope.cart.amount
         }
     }
 
