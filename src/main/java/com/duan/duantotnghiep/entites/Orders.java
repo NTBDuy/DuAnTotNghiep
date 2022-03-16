@@ -20,6 +20,7 @@ public class Orders implements Serializable {
     BigDecimal amount;
     Date orderDate;
     String address;
+    String phone;
     Integer status;
 
     @JsonIgnore

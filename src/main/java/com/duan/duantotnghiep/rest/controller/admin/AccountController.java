@@ -1,6 +1,7 @@
 package com.duan.duantotnghiep.rest.controller.admin;
 
 import com.duan.duantotnghiep.entites.Accounts;
+import com.duan.duantotnghiep.entites.Response;
 import com.duan.duantotnghiep.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class AccountController {
 
     // Tạo mới Accounts
     @PostMapping()
-    public Accounts create(@RequestBody Accounts a) {
+    public Response create(@RequestBody Accounts a) {
         return accountService.create(a);
     }
 

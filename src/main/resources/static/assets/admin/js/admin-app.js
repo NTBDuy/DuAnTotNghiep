@@ -22,7 +22,7 @@ app.config(function($routeProvider){
         templateUrl: "account",
         controller: "account-ctrl"
     })
-    .when("/authorize",{
+    .when("/authority",{
         templateUrl: "authority",
         controller: "authority-ctrl"
     })

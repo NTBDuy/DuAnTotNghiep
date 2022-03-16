@@ -30,4 +30,7 @@ public class AdminController {
     // Truy vấn tới trang quản lý tài khoản
     @GetMapping("/order")
     public String order(){ return "admin/order"; }
+
+    @GetMapping("/authority")
+    public String autho(){ return "admin/authority"; }
 }

@@ -32,7 +32,7 @@
                     <a href="/cart" class="btn btn-outline-dark" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
-                        <!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> -->
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{cart.count}}</span>
                     </a>
                 </form>
                 <div class="dropdown text-end">
@@ -41,13 +41,6 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="mdo" width="26" height="26" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-<!--                        <li><a class="dropdown-item" href="#">Profile</a></li>-->
-<!--                        <li><a class="dropdown-item" href="/admin/">Admin</a></li>-->
-<!--                        <li>-->
-<!--                            <hr class="dropdown-divider">-->
-<!--                        </li>-->
-<!--                        <li><a class="dropdown-item" href="/security/login">Sign in</a></li>-->
-<!--                        <li><a class="dropdown-item" href="#">Sign out</a></li>-->
                         <th:block th:if="${#request.remoteUser}">
                             <li><a ng-click="showhoso()" class="dropdown-item" th:href="@{/profile}">Profile</a></li>
                             <li th:if="${#request.isUserInRole('ADMI') or #request.isUserInRole('STAF')}">
@@ -108,41 +101,37 @@
                     </div> 
                     <div class="row mt-3">
                         <div class="col">
-                            <a class="btn btn-outline-warning mb-2" th:href="@{/cart/view}">Chỉnh sửa giỏ hàng</a>
+                            <a class="btn btn-outline-warning mb-2" th:href="@{/cart}">Return to cart</a>
                         </div>
-                        <!-- <div class="col-4 text-end">
-                            <button class="btn btn-outline-danger mb-2" ng-click="cart.clear()">Xoá toàn bộ
-                                giỏ hàng</button>
-                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-3 pt-4">
                     <div class="row">
                         <div class="card py-4 px-1">
                             <div class="card-body">
-                                <h5>Xác nhận đơn hàng</h5>
+                                <h5>Confirm order</h5>
                                 <ul class="list-group list-group-flush">
                                     <li
                                         class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
-                                        Tổng tiền
+                                        Amount
                                         <span>{{cart.amount | number : 0}} VNĐ</span>
                                     </li>
                                     <li
                                         class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
-                                        Số lượng
+                                        Quantity
                                         <span>{{cart.count}}</span>
                                     </li>
                                     <li
                                         class="list-group-item d-flex justify-content-between align-items-center px-0 pb-2">
-                                        Phí vận chuyển
+                                        Shipping fee
                                         <span>Free</span>
                                     </li>
                                     <li
                                         class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-1">
                                         <div>
-                                            <strong>Tổng tiền thanh toán</strong>
+                                            <strong>Total payment</strong>
                                             <strong>
-                                                <p class="mb-0">(Đã bao gồm VAT)</p>
+                                                <p class="mb-0">(VAT included)</p>
                                             </strong>
                                         </div>
                                         <span><strong>{{cart.amount | number : 0}} VNĐ</strong></span>
@@ -150,24 +139,27 @@
                                 </ul>
                                 <div class="card border-1 mb-2">
                                     <div class="card-body">
-                                        <span>Tên tài khoản: <span id="username">[[${#request.remoteUser}]]</span></span>
-                                        <!-- <div class="form-control" id="username">[[${#request.remoteUser}]]</div> -->
+                                        <span>Username: <span id="username">[[${#request.remoteUser}]]</span></span>
                                     </div>
                                 </div>
                                 <div class="card border-1 mb-2">
                                     <div class="card-body">
-                                        <span>Ngày đặt: {{order.orderDate | date:'dd/MM/yyyy'}}</span>
+                                        <span>Order date: {{order.orderDate | date:'dd/MM/yyyy'}}</span>
                                     </div>
+                                </div>
+                                <div class="form-floating mb-2 pb-2">
+                                    <input ng-model="order.phone" class="form-control" id="phone_number"
+                                        style="height: 100px"></input>
+                                    <label for="phone_number">Number phone:</label>
                                 </div>
                                 <div class="form-floating mb-2 pb-2">
                                     <textarea ng-model="order.address" class="form-control"
                                         placeholder="Leave a comment here" id="floatingTextarea2"
                                         style="height: 100px"></textarea>
-                                    <label for="floatingTextarea2">Địa chỉ của bạn</label>
+                                    <label for="floatingTextarea2">Your address: </label>
                                 </div>
                                 <button ng-click="order.purchase()"
-                                    class="btn btn-outline-primary w-100 btn-block waves-effect waves-light">Xác
-                                    nhận mua hàng</button>
+                                    class="btn btn-outline-primary w-100 btn-block waves-effect waves-light">Confirm</button>
                             </div>
                         </div>
                     </div>

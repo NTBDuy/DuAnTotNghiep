@@ -1,8 +1,10 @@
 package com.duan.duantotnghiep.rest.controller.client;
 
+import com.duan.duantotnghiep.DTO.ChangePassDTO;
 import com.duan.duantotnghiep.entites.Accounts;
 import com.duan.duantotnghiep.entites.Order_details;
 import com.duan.duantotnghiep.entites.Orders;
+import com.duan.duantotnghiep.entites.Response;
 import com.duan.duantotnghiep.service.AccountService;
 import com.duan.duantotnghiep.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,11 @@ public class ProfileController {
 
     @GetMapping("/order/{username}")
     public List<Orders> findOrderByUsername(@PathVariable("username") String username) {return orderService.findByUsername(username);}
+
+    @PostMapping("/changePass")
+    public Response changePass(@RequestBody ChangePassDTO changePassDTO){
+        return accountService.changePass(changePassDTO);
+    }
 
     // Sửa Accounts
     @PutMapping("/{username}")

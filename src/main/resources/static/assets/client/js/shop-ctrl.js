@@ -2,7 +2,7 @@ const app = angular.module("myApp", [])
 
 app.controller("myCtrl", function($scope, $http){
 
-
+    $scope.user = [];
     $scope.itemsP = [];
     $scope.tong = 0;
 
@@ -14,6 +14,12 @@ app.controller("myCtrl", function($scope, $http){
         $http.get(`/rest/shop/byPrice/${min}and${max}`).then(resp => {
             $scope.itemsP = resp.data;
         });
+    }
+
+    $scope.loadUserDetail = function(){
+        $http.get(`/rest/shop/getUser`).then(resp => {
+            $scope.user = resp.data;
+        })
     }
 
     $scope.loadCateAndBrand = function(){

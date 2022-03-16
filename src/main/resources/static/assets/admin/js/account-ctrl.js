@@ -1,6 +1,7 @@
 app.controller("account-ctrl", function($scope, $http){
     $scope.items = [];
     $scope.form = {};
+    $scope.message = [];
 
     $scope.initialize = function(){
         $http.get(`/rest/admin/account`).then(resp => {
@@ -42,13 +43,13 @@ app.controller("account-ctrl", function($scope, $http){
         var item = angular.copy($scope.form);
         $http.post(`/rest/admin/account`, item).then(resp => {
             $scope.items.push(resp.data);
-            $scope.reset();
-            $("#modalTitle").text("Thông báo");
-            $("#modalBody").text("Thêm mới thành công!");
+            $scope.message = (resp.data);
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text($scope.message.mess);
             $("#myModal").modal("show");
         }).catch(error => {
-            $("#modalTitle").text("Thông báo");
-            $("#modalBody").text("Lỗi thêm mới!");
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text("Error!");
             $("#myModal").modal("show");
             console.log("Error", error);
         })

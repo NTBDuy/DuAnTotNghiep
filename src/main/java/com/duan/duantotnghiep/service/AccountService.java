@@ -1,6 +1,9 @@
 package com.duan.duantotnghiep.service;
 
+import com.duan.duantotnghiep.DTO.ChangePassDTO;
+import com.duan.duantotnghiep.DTO.RegisterDTO;
 import com.duan.duantotnghiep.entites.Accounts;
+import com.duan.duantotnghiep.entites.Response;
 
 import java.util.List;
 
@@ -11,7 +14,13 @@ public interface AccountService {
 
     Accounts findByUsername(String username);
 
-    Accounts create(Accounts a);
+    Response changePass(ChangePassDTO changePassDTO);
+
+    Response forgot(String mail);
+
+    Response register(RegisterDTO registerDTO);
+
+    Response create(Accounts a);
 
     Accounts update(Accounts a);
 
