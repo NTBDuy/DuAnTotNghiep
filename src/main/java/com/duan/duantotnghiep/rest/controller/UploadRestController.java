@@ -24,7 +24,23 @@ import java.util.UUID;
 @RestController
 public class UploadRestController {
 
-//	@PostMapping("/rest/upload/{id}")
+	@RequestMapping(value = "/rest/upload/productImage/{id}", method = RequestMethod.POST)
+	public FileData uploadProductImage(@PathVariable("id") Long id,
+						   @PathParam("file") MultipartFile file) throws IOException {
+		UUID random = UUID.randomUUID();
+		String getFileType = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1).trim();
+		String randomNameFile = random + "-" + id + "." + getFileType;
+		System.out.println("ID is: " + id);
+		System.out.println("File type is: " + getFileType);
+		System.out.println("Random name is: " + randomNameFile);
+		String uploadDir = "uploads/products";
+		saveFile(uploadDir, randomNameFile, file);
+		FileData fd = new FileData();
+		fd.setFilename(randomNameFile);
+		fd.setSize(file.getSize());
+		return fd;
+	}
+
 	@RequestMapping(value = "/rest/upload/{username}", method = RequestMethod.POST)
 	public FileData upload(@PathVariable("username") String id,
 						   @PathParam("file") MultipartFile file) throws IOException {

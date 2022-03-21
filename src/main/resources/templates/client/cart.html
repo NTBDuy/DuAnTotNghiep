@@ -43,13 +43,6 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="mdo" width="26" height="26" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-<!--                        <li><a class="dropdown-item" href="#">Profile</a></li>-->
-<!--                        <li><a class="dropdown-item" href="/admin/">Admin</a></li>-->
-<!--                        <li>-->
-<!--                            <hr class="dropdown-divider">-->
-<!--                        </li>-->
-<!--                        <li><a class="dropdown-item" href="/security/login">Sign in</a></li>-->
-<!--                        <li><a class="dropdown-item" href="#">Sign out</a></li>-->
                         <th:block th:if="${#request.remoteUser}">
                             <li><a ng-click="showhoso()" class="dropdown-item" th:href="@{/profile}">Profile</a></li>
                             <li th:if="${#request.isUserInRole('ADMI') or #request.isUserInRole('STAF')}">
@@ -83,7 +76,6 @@
                         <h5>Số lượng sản phẩm: <span>{{cart.count}}</span></h5>
                     </div>
                     <div class="listcart" th:fragment="shopping-cart">
-                        <!-- <div class="listcart" th:fragment="shopping-cart"> -->
                         <table class="table text-center tableGioHang">
                             <thead>
                                 <tr>
@@ -99,7 +91,7 @@
                             <tbody>
                                 <tr ng-repeat="item in cart.items">
                                     <td class="py-5">{{item.id}}</td>
-                                    <td class="py-5"></td>
+                                    <td class="py-5"><img th:src="@{getproduct/{{item.images}}}" height="100px" width="100px" class="img-fluid"></td>
                                     <td class="py-5" style="width: 20%;">{{item.name}}</td>
                                     <td class="py-5">{{item.price | number : 0}}</td>
                                     <td style="width: 10%;" class="py-5">

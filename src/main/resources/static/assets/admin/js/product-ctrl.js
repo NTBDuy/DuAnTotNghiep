@@ -1,24 +1,28 @@
 app.controller("product-ctrl", function ($scope, $http) {
+    // Dữ liệu sản phẩm
     $scope.items = [];
+    // Dữ liệu chi tiết sản phẩm
     $scope.form = {};
+    // Dữ liệu danh sách danh mục
     $scope.cates = [];
+    // Dữ liệu danh sách hãng
     $scope.brands = [];
 
+    // Khởi tạo
     $scope.initialize = function(){
         $http.get(`/rest/admin/product`).then(resp => {
             $scope.items = resp.data;
         });
-
         //load categories
         $http.get("/rest/admin/category").then(resp => {
             $scope.cates = resp.data;
         })
-
         //load brands
         $http.get("/rest/admin/brand").then(resp => {
             $scope.brands = resp.data;
         })
     }
+    $scope.initialize();
 
     //xóa form
     $scope.reset = function () {
@@ -41,7 +45,26 @@ app.controller("product-ctrl", function ($scope, $http) {
         }
     }
 
-    $scope.initialize();
+    // Upload hình ảnh
+    $scope.imageChanged = function (files) {
+        var data = new FormData();
+        data.append('file', files[0]);
+        var item = angular.copy($scope.form);
+        $http.post(`/rest/upload/productImage/${item.id}`, data, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).then(resp => {
+            $scope.fileData = resp.data;
+            $scope.form.images = $scope.fileData.filename;
+            console.log("File Data: ", $scope.fileData);
+        }).catch(error => {
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text("Error!");
+            $("#myModal").modal("show");
+            console.log("Error", error)
+        })
+    }
+
 
     $scope.detail = function (item) {
         $scope.form = angular.copy(item);

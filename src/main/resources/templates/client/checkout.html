@@ -88,10 +88,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in cart.items">
-                                    <td class="py-5"></td>
-                                    <!-- <td class="text-center"><img
-                                            th:src="@{|/assets/images/imageproduct/{{item.image}}|}" alt="..."
-                                            height="100px" width="100px"></td> -->
+                                    <td class="py-5"><img th:src="@{getproduct/{{item.images}}}" height="100px" width="100px" class="img-fluid"></td>
                                     <td class="py-5" style="width: 20%;">{{item.name}}</td>
                                     <td class="py-5">{{item.price | number : 0}}</td>
                                     <td class="py-5">{{item.qty}}</td>

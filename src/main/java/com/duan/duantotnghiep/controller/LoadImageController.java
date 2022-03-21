@@ -17,6 +17,24 @@ import java.nio.file.Paths;
 @Controller
 public class LoadImageController {
 
+	@RequestMapping(value = {"getproduct/{photo}","admin/getproduct/{photo}","productDetail/getproduct/{photo}"}, method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> getProducts(@PathVariable("photo") String photo) throws IOException {
+		if (!photo.equals("") || photo != null) {
+			try {
+				Path filename = Paths.get("uploads/products/"+photo);
+				byte[] buffer = Files.readAllBytes(filename);
+				ByteArrayResource byteArrayResource = new ByteArrayResource(buffer);
+				return ResponseEntity.ok().contentLength(buffer.length).body(byteArrayResource);
+			} catch (Exception e) {
+			}
+		}
+		Path filename = Paths.get("uploads/products/notFound.png");
+		byte[] buffer = Files.readAllBytes(filename);
+		ByteArrayResource byteArrayResource = new ByteArrayResource(buffer);
+		return ResponseEntity.ok().contentLength(buffer.length).body(byteArrayResource);
+	}
+
 	@RequestMapping(value = {"getcustomer/{photo}","admin/getcustomer/{photo}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> getCustomer(@PathVariable("photo") String photo) throws IOException {
@@ -44,19 +62,12 @@ public class LoadImageController {
 		return ResponseEntity.ok().contentLength(buffer.length).body(byteArrayResource);
 	}
 
-//	@RequestMapping(value = "getcustomer/{photo}", method = RequestMethod.GET)
-//	@ResponseBody
-//	public ResponseEntity<ByteArrayResource> getCustomer(@PathVariable("photo") String photo) {
-//		if (!photo.equals("") || photo != null) {
-//			try {
-//				Path filename = Paths.get("uploads/customer", photo);
-//				byte[] buffer = Files.readAllBytes(filename);
-//				ByteArrayResource byteArrayResource = new ByteArrayResource(buffer);
-//				return ResponseEntity.ok().contentLength(buffer.length).body(byteArrayResource);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return ResponseEntity.badRequest().build();
-//	}
+	@RequestMapping(value = {"getproduct/","admin/getproduct/","productDetail/getproduct/"}, method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> getIP() throws IOException {
+		Path filename = Paths.get("uploads/products/notFound.png");
+		byte[] buffer = Files.readAllBytes(filename);
+		ByteArrayResource byteArrayResource = new ByteArrayResource(buffer);
+		return ResponseEntity.ok().contentLength(buffer.length).body(byteArrayResource);
+	}
 }
