@@ -33,4 +33,7 @@ public class AdminController {
 
     @GetMapping("/authority")
     public String autho(){ return "admin/authority"; }
+
+    @GetMapping("/unauthorized")
+    public String unauthorized(){ return "admin/unauthorized"; }
 }

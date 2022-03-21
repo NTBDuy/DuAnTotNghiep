@@ -109,87 +109,99 @@
                                         <h4 class="mt-4 mb-4">Detail & Edit Account</h4>
                                     </div>
                                 </div>
-                                <div class="card mb-4">
-                                    <!-- <div class="card-header text-center" style="background-color: #fff;"></div> -->
-                                    <div class="card-body">
-                                        <form class="row g-3">
-                                            <div class="col-md-6">
-                                                <label for="inputUsername" class="form-label">Username</label>
-                                                <input type="text" class="form-control" id="inputUsername"
-                                                    ng-model="form.username">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="inputFullname" class="form-label">Fullname</label>
-                                                <input type="text" class="form-control" id="inputFullname"
-                                                    ng-model="form.fullname">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="inputEmail" class="form-label">Email</label>
-                                                <input type="text" class="form-control" id="inputEmail"
-                                                    ng-model="form.email">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="inputPassword" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="inputPassword"
-                                                    ng-model="form.password">
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="inputImage" class="form-label">Image</label>
-                                                <input type="text" class="form-control" id="inputImage">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="inputPhone" class="form-label">Phone</label>
-                                                <input class="form-control" id="inputPhone" ng-model="form.phone">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="inputDate" class="form-label">Register Date</label>
-                                                <input class="form-control" type="date" id="inputDate"
-                                                    ng-model="form.register_date">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="inputGender" class="form-label me-2">Gender:</label>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions" id="inlineRadio1"
-                                                        ng-model="form.gender" ng-value="true" checked>
-                                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                <div class="row">
+                                    <div class="card mb-4 col-3 border-0">
+                                        <img th:src="@{getcustomer/{{form.image}}}" width="60%" id="img"
+                                        class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}">
+                                    </div>
+                                    <div class="card mb-4 col-9 border-0">
+                                        <!-- <div class="card-header text-center" style="background-color: #fff;"></div> -->
+                                        <div class="card-body">
+                                            <form class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="inputUsername" class="form-label">Username</label>
+                                                    <input type="text" class="form-control" id="inputUsername"
+                                                        ng-model="form.username">
                                                 </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions" id="inlineRadio2"
-                                                        ng-model="form.gender" ng-value="false">
-                                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                                <div class="col-md-6">
+                                                    <label for="inputFullname" class="form-label">Fullname</label>
+                                                    <input type="text" class="form-control" id="inputFullname"
+                                                        ng-model="form.fullname">
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="inputStatus" class="form-label me-2">Status:</label>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions2" id="inlineRadio3"
-                                                        ng-model="form.status" ng-value="true">
-                                                    <label class="form-check-label" for="inlineRadio3">Yes</label>
+                                                <div class="col-md-6">
+                                                    <label for="inputEmail" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" id="inputEmail"
+                                                        ng-model="form.email">
                                                 </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions2" id="inlineRadio4"
-                                                        ng-model="form.status" ng-value="false" checked>
-                                                    <label class="form-check-label" for="inlineRadio4">No</label>
+                                                <div class="col-md-6">
+                                                    <label for="inputPassword" class="form-label">Password</label>
+                                                    <input type="password" class="form-control" id="inputPassword"
+                                                        ng-model="form.password">
                                                 </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="d-flex justify-content-center">
-                                                    <button ng-click="reset()" class="btn btn-outline-secondary me-2"><i
-                                                            class="bi bi-journal"></i></button>
-                                                    <button ng-click="create()" class="btn btn-outline-success me-2"><i
-                                                            class="bi bi-journal-plus"></i></button>
-                                                    <button ng-click="update()" class="btn btn-outline-info me-2"><i
-                                                            class="bi bi-journal-check"></i></button>
-                                                    <button ng-click="delete(form)"
-                                                        class="btn btn-outline-danger me-2"><i
-                                                            class="bi bi-journal-x"></i></button>
-                                                </p>
-                                            </div>
-                                        </form>
+                                                <div class="col-12">
+                                                    <label>Avatar: </label>
+                                                    <div class="form-group mb-3">
+                                                        <input type="file" class="form-control" nid="image"
+                                                            onchange="angular.element(this).scope().imageChanged(this.files)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputPhone" class="form-label">Phone</label>
+                                                    <input class="form-control" id="inputPhone" ng-model="form.phone">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputDate" class="form-label">Register Date</label>
+                                                    <input class="form-control" type="date" id="inputDate"
+                                                        ng-model="form.register_date">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputGender" class="form-label me-2">Gender:</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio1"
+                                                            ng-model="form.gender" ng-value="true" checked>
+                                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio2"
+                                                            ng-model="form.gender" ng-value="false">
+                                                        <label class="form-check-label"
+                                                            for="inlineRadio2">Female</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputStatus" class="form-label me-2">Status:</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions2" id="inlineRadio3"
+                                                            ng-model="form.status" ng-value="true">
+                                                        <label class="form-check-label" for="inlineRadio3">Yes</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions2" id="inlineRadio4"
+                                                            ng-model="form.status" ng-value="false" checked>
+                                                        <label class="form-check-label" for="inlineRadio4">No</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="d-flex justify-content-center">
+                                                        <button ng-click="reset()"
+                                                            class="btn btn-outline-secondary me-2"><i
+                                                                class="bi bi-journal"></i></button>
+                                                        <button ng-click="create()"
+                                                            class="btn btn-outline-success me-2"><i
+                                                                class="bi bi-journal-plus"></i></button>
+                                                        <button ng-click="update()" class="btn btn-outline-info me-2"><i
+                                                                class="bi bi-journal-check"></i></button>
+                                                        <button ng-click="delete(form)"
+                                                            class="btn btn-outline-danger me-2"><i
+                                                                class="bi bi-journal-x"></i></button>
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

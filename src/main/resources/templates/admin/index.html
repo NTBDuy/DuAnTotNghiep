@@ -57,7 +57,7 @@
                             Report
                         </a>
                         <div class="sb-sidenav-menu-heading">Management</div>
-                        <a class="nav-link" href="#!authority">
+                        <a th:if="${#request.isUserInRole('ADMI')}" class="nav-link" href="#!authority">
                             <div class="sb-nav-link-icon"><i class="bi bi-person"></i></div>
                             Authorize
                         </a>

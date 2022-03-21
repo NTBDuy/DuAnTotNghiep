@@ -17,13 +17,34 @@ app.controller("authority-ctrl",function($scope,$http,$location){
         $http.get("/rest/admin/authority/authority").then(resp =>{
             $scope.authorities = resp.data;
             console.log($scope.authorities);
+        }).catch(error =>{
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text("You do not have access!");
+            $("#myModal").modal("show");
+            console.log("Error",error);
         })
+    }
+
+    $scope.search = function () {
+        var x = document.getElementById("searchName").value;
+        if (x == '') {
+            $scope.initialize();
+        } else {
+            $http.get(`/rest/admin/account/search/${x}`).then(resp => {
+                $scope.items = resp.data;
+                $scope.pager.first()
+            });
+        }
     }
 
     $scope.authority_of = function(acc,role){
         if($scope.authorities){
             return $scope.authorities.find(ur => ur.accounts.username == acc.username && ur.roles.id == role.id);
         }
+    }
+
+    $scope.redirect = function() {
+        $location.path("/unauthorized");
     }
 
     $scope.authority_changed= function(acc,role){

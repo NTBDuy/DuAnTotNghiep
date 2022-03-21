@@ -1,9 +1,13 @@
-app.controller("account-ctrl", function($scope, $http){
+app.controller("account-ctrl", function ($scope, $http) {
+    // Dữ liệu tài khoản
     $scope.items = [];
+    // Dữ liệu chi tiết tài khoản
     $scope.form = {};
+    // Dữ liệu xuất thông báo
     $scope.message = [];
 
-    $scope.initialize = function(){
+    // Khởi tạo
+    $scope.initialize = function () {
         $http.get(`/rest/admin/account`).then(resp => {
             $scope.items = resp.data;
             $scope.items.forEach(item => {
@@ -11,19 +15,40 @@ app.controller("account-ctrl", function($scope, $http){
             })
         });
     }
+    $scope.initialize();
 
-    //xóa form
+    // Xóa dữ liệu trên form
     $scope.reset = function () {
         $scope.form = {};
     }
 
-    $scope.initialize();
-
+    // Thông tin chi tiết 
     $scope.detail = function (item) {
         $scope.form = angular.copy(item);
         $(".nav-tabs a:eq(1)").tab('show')
     }
 
+    // Upload hình ảnh cho tài khoản
+    $scope.imageChanged = function (files) {
+        var data = new FormData();
+        data.append('file', files[0]);
+        var item = angular.copy($scope.form);
+        $http.post(`/rest/upload/${item.username}`, data, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).then(resp => {
+            $scope.fileData = resp.data;
+            $scope.form.image = $scope.fileData.filename;
+            console.log("File Data: ", $scope.fileData);
+        }).catch(error => {
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text("Error!");
+            $("#myModal").modal("show");
+            console.log("Error", error)
+        })
+    }
+
+    // Tìm kiếm bằng tài khoản bằng chuỗi ký tự
     $scope.search = function () {
         var x = document.getElementById("searchName").value;
         if (x == '') {
@@ -38,7 +63,7 @@ app.controller("account-ctrl", function($scope, $http){
         }
     }
 
-    //Thêm 
+    // Thêm tài khoản
     $scope.create = function () {
         var item = angular.copy($scope.form);
         $http.post(`/rest/admin/account`, item).then(resp => {
@@ -55,7 +80,7 @@ app.controller("account-ctrl", function($scope, $http){
         })
     }
 
-    //Cập nhật 
+    // Cập nhật tài khoản
     $scope.update = function () {
         var item = angular.copy($scope.form);
         $http.put(`/rest/admin/account/${item.username}`, item).then(resp => {
@@ -72,7 +97,7 @@ app.controller("account-ctrl", function($scope, $http){
         })
     }
 
-    //Xóa  
+    // Xóa tài khoản
     $scope.delete = function (item) {
         $http.delete(`/rest/admin/account/${item.username}`).then(resp => {
             var index = $scope.items.findIndex(p => p.username == item.username);

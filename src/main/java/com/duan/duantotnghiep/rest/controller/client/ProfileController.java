@@ -33,9 +33,8 @@ public class ProfileController {
     }
 
     // Sửa Accounts
-    @PutMapping("/{username}")
-    public Accounts update(@PathVariable("username") String username,
-                           @RequestBody Accounts a) {
+    @PutMapping
+    public Accounts update(@RequestBody Accounts a) {
         return accountService.update(a);
     }
 

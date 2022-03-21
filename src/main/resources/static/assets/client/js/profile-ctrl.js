@@ -1,19 +1,25 @@
 const app = angular.module("myApp", [])
 
 app.controller("myCtrl", function ($scope, $http) {
+    // Thông tin người dùng
     $scope.items = [];
+    // Mảng dữ liệu dùng để thay đổi mật khẩu
     $scope.itemPass = {};
+    // Thông tin hoá đơn của người dùng
     $scope.itemOrders = [];
+    // Dữ liệu xuất thông báo
     $scope.message = [];
+    // Dữ liệu xuất FileData
 
+    // Khởi tạo
     $scope.initialize = function () {
         var username = $("#username").text();
-
+        // Lấy thông tin người dùng.
         $http.get(`/rest/profile/${username}`).then(resp => {
             $scope.items = resp.data;
-            $scope.items.register_date = new Date($scope.items.register_date)
+            $scope.items.register_date = new Date($scope.items.register_date);
         });
-
+        // Lấy danh sách hoá đơn người dùng.
         $http.get(`/rest/profile/order/${username}`).then(resp => {
             $scope.itemOrders = resp.data;
             $scope.itemOrders.forEach(item => {
@@ -21,13 +27,60 @@ app.controller("myCtrl", function ($scope, $http) {
             })
         })
     }
-
     $scope.initialize();
 
+    // Upload hình ảnh cho người dùng
+    $scope.imageChanged = function (files) {
+        var data = new FormData();
+        data.append('file', files[0]);
+        var item = angular.copy($scope.items);
+        $http.post(`/rest/upload/${item.username}`, data, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).then(resp => {
+            $scope.fileData = resp.data;
+            $scope.items.image = $scope.fileData.filename;
+            console.log("File Data: ", $scope.fileData);
+            // $scope.items.image = resp.data.name;
+        }).catch(error => {
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text("Error!");
+            $("#myModal").modal("show");
+            console.log("Error", error)
+        })
+    }
+
+    // Cập nhật thông tin người dùng
+    $scope.update = function () {
+        var item = angular.copy($scope.items);
+        $scope.initialize();
+        $http.put(`/rest/profile`, item).then(resp => {
+            $scope.initialize();
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text("Success!");
+            $("#myModal").modal("show");
+        }).catch(error => {
+            $("#modalTitle").text("Notification");
+            $("#modalBody").text("Error!");
+            $("#myModal").modal("show");
+            console.log("Error", error);
+        })
+    }
+
+    // Hiển thị modal chi tiết đơn hàng
+    $scope.detailItemsFunc = function (item) {
+        $("#orderDetailModal").modal("show");
+        $http.get(`/rest/profile/order/detail/${item.id}`).then(resp => {
+            $scope.detailItems = resp.data;
+        })
+    }
+
+    // Hiển thị modal thay đổi mật khẩu
     $scope.showChangePass = function() {
         $("#changPassModal").modal("show");
     }
 
+    // Chức năng thay đổi mật khẩu
     $scope.changePass = function() {
         var current_pass = document.getElementById("currentP").value;
         var new_pass = document.getElementById("newP").value;
@@ -45,30 +98,6 @@ app.controller("myCtrl", function ($scope, $http) {
             $("#myModal").modal("show");
         }).catch(error => {
             $("#changPassModal").modal("hide");
-            $("#modalTitle").text("Notification");
-            $("#modalBody").text("Error!");
-            $("#myModal").modal("show");
-            console.log("Error", error);
-        })
-    }
-
-    $scope.detailItemsFunc = function (item) {
-        $("#orderDetailModal").modal("show");
-        $http.get(`/rest/profile/order/detail/${item.id}`).then(resp => {
-            $scope.detailItems = resp.data;
-        })
-    }
-
-    //Cập nhật 
-    $scope.update = function () {
-        var item = angular.copy($scope.items);
-        $scope.initialize();
-        $http.put(`/rest/profile/${item.username}`, item).then(resp => {
-            $scope.initialize();
-            $("#modalTitle").text("Notification");
-            $("#modalBody").text("Success!");
-            $("#myModal").modal("show");
-        }).catch(error => {
             $("#modalTitle").text("Notification");
             $("#modalBody").text("Error!");
             $("#myModal").modal("show");
@@ -108,8 +137,6 @@ app.controller("myCtrl", function ($scope, $http) {
         }
     }
 
-
-
     //QUẢN LÝ GIỎ HÀNG
     $scope.cart = {
         items: [],
@@ -147,9 +174,6 @@ app.controller("myCtrl", function ($scope, $http) {
             $("#modalBody").text("Đã xóa toàn bộ sản phẩm khỏi giỏ hàng!");
             $("#myModal").modal("show");
         },
-
-        // //Tính thành tiền của một sản phẩm
-        // amt_of(item) { },
 
         //Tính tổng số lượng các mặt hàng trong giỏ
         get count() {

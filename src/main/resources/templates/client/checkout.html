@@ -38,7 +38,8 @@
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="mdo" width="26" height="26" class="rounded-circle">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="mdo" width="26"
+                            height="26" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                         <th:block th:if="${#request.remoteUser}">
@@ -98,7 +99,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
                     <div class="row mt-3">
                         <div class="col">
                             <a class="btn btn-outline-warning mb-2" th:href="@{/cart}">Return to cart</a>
@@ -147,10 +148,10 @@
                                         <span>Order date: {{order.orderDate | date:'dd/MM/yyyy'}}</span>
                                     </div>
                                 </div>
-                                <div class="form-floating mb-2 pb-2">
-                                    <input ng-model="order.phone" class="form-control" id="phone_number"
-                                        style="height: 100px"></input>
-                                    <label for="phone_number">Number phone:</label>
+                                <div class="form-floating mb-3">
+                                    <input ng-model="order.phone" type="text" class="form-control" id="phoneNumber">
+                                    <!-- <input type="text" hidden id="phoneN"> -->
+                                    <label for="phoneNumber">Number phone: </label>
                                 </div>
                                 <div class="form-floating mb-2 pb-2">
                                     <textarea ng-model="order.address" class="form-control"
@@ -173,7 +174,7 @@
             <p class="m-0 text-center text-white">Dự án tốt nghiệp</p>
         </div>
     </footer>
-    
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1">
         <div class="modal-dialog">

@@ -1,14 +1,12 @@
 const app = angular.module("myApp", [])
 
-app.controller("myCtrl", function($scope, $http){
+app.controller("myCtrl", function ($scope, $http) {
 
     $scope.user = [];
     $scope.itemsP = [];
-    $scope.tong = 0;
+    $scope.tong = "";
 
-    $scope.loadProfile
-
-    $scope.loadByPrice = function() {
+    $scope.loadByPrice = function () {
         var min = document.getElementById("min_price").value;
         var max = document.getElementById("max_price").value;
         $http.get(`/rest/shop/byPrice/${min}and${max}`).then(resp => {
@@ -16,13 +14,14 @@ app.controller("myCtrl", function($scope, $http){
         });
     }
 
-    $scope.loadUserDetail = function(){
+    $scope.loadUserDetail = function () {
         $http.get(`/rest/shop/getUser`).then(resp => {
             $scope.user = resp.data;
+            $scope.test = $scope.user.phone;
         })
     }
 
-    $scope.loadCateAndBrand = function(){
+    $scope.loadCateAndBrand = function () {
         //load categories
         $http.get("/rest/admin/category").then(resp => {
             $scope.cates = resp.data;
@@ -33,24 +32,25 @@ app.controller("myCtrl", function($scope, $http){
         })
     }
 
-    $scope.loadProByCate = function(id) {
+    $scope.loadProByCate = function (id) {
         $http.get(`/rest/shop/byCate/${id}`).then(resp => {
             $scope.itemsP = resp.data;
         });
     }
 
 
-    $scope.loadProByBrand = function(id) {
+    $scope.loadProByBrand = function (id) {
         $http.get(`/rest/shop/byBrand/${id}`).then(resp => {
             $scope.itemsP = resp.data;
         });
     }
 
-    $scope.initialize = function(){
+    $scope.initialize = function () {
         $http.get(`/rest/shop`).then(resp => {
             $scope.itemsP = resp.data;
         })
         $scope.loadCateAndBrand();
+        $scope.loadUserDetail();
     }
 
     $scope.search = function () {
@@ -142,29 +142,30 @@ app.controller("myCtrl", function($scope, $http){
     $scope.order = {
         orderDate: new Date(),
         address: "",
+        phone: "",
         accounts: { username: $("#username").text() },
         status: 1,
         amount: $scope.tong,
         get orderDetails() {
             return $scope.cart.items.map(item => {
                 return {
-                    products: {id: item.id},
-                    price: (item.price*item.qty),
+                    products: { id: item.id },
+                    price: (item.price * item.qty),
                     quantity: item.qty
                 }
             });
         },
         purchase() {
             var order = angular.copy(this);
-            //Thực hiện đặt hàng
+            console.log("Order details: ", order);
             $http.post("/rest/orders", order).then(resp => {
                 $scope.cart.clear();
-                $("#modalTitle").text("Thông báo");
-                $("#modalBody").text("Đặt hàng thành công!");
+                $("#modalTitle").text("Notification");
+                $("#modalBody").text("Order Success!");
                 $("#myModal").modal("show");
             }).catch(error => {
-                $("#modalTitle").text("Thông báo");
-                $("#modalBody").text("Đặt hàng lỗi!");
+                $("#modalTitle").text("Notification");
+                $("#modalBody").text("Order error!");
                 $("#myModal").modal("show");
                 console.log(error)
             })
