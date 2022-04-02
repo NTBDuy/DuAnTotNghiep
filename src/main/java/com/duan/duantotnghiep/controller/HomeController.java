@@ -42,7 +42,6 @@ public class HomeController {
     public String productD(Model model, @PathVariable("id") Long id) {
         Products p = productService.findById(id);
         model.addAttribute("items", p);
-
         return "client/product_detail";
     }
 }

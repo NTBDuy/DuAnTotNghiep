@@ -37,4 +37,6 @@ public class Accounts implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "accounts")
     List<Product_reviews> product_reviews;
+
+
 }
